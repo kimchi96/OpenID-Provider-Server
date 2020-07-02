@@ -23,55 +23,6 @@ use Carbon\Carbon;
 
 class MyController extends Controller
 {
-    public function getView_RP()
-    {    
-        return view ('rp');
-    }
-
-    public function postView_RP()
-    {
-        return view ('rp');
-    }
-
-    public function getCallBack_RP(Request $request)
-    {    
-        $code          =   $request->input('code'); 
-        $error         =   $request->input('error');
-        $state         =   $request->input('state');
-        if($error !== null)
-        {
-            return view('error');  
-        }
-        return view ('callback');
-
-    }
-    public function postCallBack_RP(Request $request)
-    {
-        $code          =   $request->input('code'); 
-        $error         =   $request->input('error');
-        $state         =   $request->input('state');
-        if($error !== null)
-        {
-            return redirect()->route('rp'); 
-        }
-        return redirect()->route('userinfo');
-    }
-
-    public function getLogin_RP()
-    {    
-        return view ('rplogin');
-    }
-
-    public function postLogin_RP()
-    {
-        return view ('rplogin');
-    }
-
-    public function getUser_RP()
-    {    
-        return view ('userinfo');
-    }
-
     public function getView_Login(Request $request)
     {   
         $response_type  =   $request->input('response_type'); 
