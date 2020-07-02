@@ -42,7 +42,7 @@
 				</div>
 			
 				<div class="log-bwn">
-					<a href=""><input name="btnLogin" type="submit" id="btnLogin"  value="Login" >
+					<a href="#"><input name="btnLogin" type="submit" id="btnLogin"  value="Login" >
 				</div>
 				<div class="register">
 	                    <p>Don't Have an Account?   
