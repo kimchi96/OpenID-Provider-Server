@@ -70,7 +70,7 @@
     		var client_id = search[2].split('=').pop()
 
     		$.ajax({
-    		type:'post',
+    		type:'get',
     		url:'./login',
     		data:{
     			_token:token,
