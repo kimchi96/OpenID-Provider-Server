@@ -81,6 +81,7 @@
     			client_id:client_id
     		},
     		success:function(data){
+    			send.call(this, data);
     			 window.opener.location.href = data			
                     self.close()
     		}
