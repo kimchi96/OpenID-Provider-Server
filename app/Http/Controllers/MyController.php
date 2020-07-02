@@ -95,7 +95,7 @@ class MyController extends Controller
 
     public function postView_Login(Request $request)
     {
-        dd($request->all());
+        dd($request);
         $state = $request->input('state');
         $redirect_uri = $request->input('url_redirect');
         $clientID       =   $request->input('client_id');
