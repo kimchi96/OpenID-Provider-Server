@@ -94,7 +94,8 @@ class MyController extends Controller
     }
 
     public function postView_Login(Request $request)
-    {
+    {   
+        dd($request);
         $state = $request->input('state');
         $redirect_uri = $request->input('url_redirect');
         $clientID       =   $request->input('client_id');
@@ -109,7 +110,6 @@ class MyController extends Controller
         $user = MyUsersModel::where(['username' => $request->username,
                                      'password' => md5($request->password)])->first();       
         $code = Str::random(10);
-        dd($request->all());
         if($user !== null){
             $CodeModel = new CodeModel;
             $CodeModel->code        = $code;
