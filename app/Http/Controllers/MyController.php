@@ -220,7 +220,7 @@ class MyController extends Controller
         }
         
         $authorization  = explode(" ", $authorization);
-        $keyGenerateToken = base64_encode_url($authorization[1]);
+        $keyGenerateToken = rtrim(strtr(base64_encode($authorization[1]), '+/', '-_'), '=');
 
         $postData = $request->post();
         $code = $postData['code'];
@@ -250,6 +250,8 @@ class MyController extends Controller
         $user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();
 
         $token = null;
+        $token_type = 'Bearer';
+        $ttl = 3600;
         $data = [
             "sub"               => $user->user_id,
             "email"             => $user->email,
@@ -282,8 +284,8 @@ class MyController extends Controller
         return response()->json([
              "id_token" => $id_token,
              "access_token" => $access_token,
-             "token_type" => 'Bearer',
-             "expires_in" => 3600   
+             "token_type" => $token_type,
+             "expires_in" => $ttl  
         ], 200);
     
     }
