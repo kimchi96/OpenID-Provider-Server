@@ -29,7 +29,7 @@ Route::get('/rp.com/cb', 'MyController@getCallBack_RP')-> name('callback');
 Route::post('/rp.com/cb', 'MyController@postCallBack_RP');
 
 Route::get('/op.com/login', 'MyController@getView_Login')-> name('oplogin');
-Route::get('/op.com/login#', 'MyController@postView_Login');
+Route::post('/op.com/login#', 'MyController@postView_Login');
 
 Route::get('/op.com/register', 'MyController@getView_Register')-> name('register');
 Route::post('/op.com/register', 'MyController@postView_Register');
