@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::get('/op.com/login', 'MyController@getView_Login')-> name('oplogin');
+Route::post('/op.com/login', 'MyController@postView_Login');
 
 Route::get('/op.com/register', 'MyController@getView_Register')-> name('register');
 Route::post('/op.com/register', 'MyController@postView_Register');

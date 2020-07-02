@@ -71,7 +71,7 @@
 
     		$.ajax({
     		type:'post',
-    		url:'/api/op.com/login',
+    		url:'./login',
     		data:{
     			_token:token,
     			username:username,

@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 });
 */
 
-Route::post('/op.com/login', 'MyController@postView_Login');
-
 //api get token
 Route::post('/token', 'MyController@postToken');
 
