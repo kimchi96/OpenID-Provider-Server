@@ -71,7 +71,7 @@
 
     		$.ajax({
     		type:'get',
-    		url:'./login',
+    		url:'./login#',
     		data:{
     			_token:token,
     			username:username,
