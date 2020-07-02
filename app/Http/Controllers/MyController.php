@@ -98,6 +98,7 @@ class MyController extends Controller
         $state = $request->input('state');
         $redirect_uri = $request->input('url_redirect');
         $clientID       =   $request->input('client_id');
+        $error          =   'access_denied';
         $request->validate([
     		'username' => 'required',
     		'password' => 'required'
@@ -108,7 +109,7 @@ class MyController extends Controller
         $user = MyUsersModel::where(['username' => $request->username,
                                      'password' => md5($request->password)])->first();       
         $code = Str::random(10);
-
+        dd($request->all());
         if($user !== null){
             $CodeModel = new CodeModel;
             $CodeModel->code        = $code;
@@ -121,7 +122,8 @@ class MyController extends Controller
             return $url;
         }
         else{
-            return view('oplogin')->withErrors(['Đăng nhập không thành công']);
+            $url_error = $redirect_uri.'?error='.$error.'&state='.$state;
+            return redirect($url_error);
          }
     }
     
