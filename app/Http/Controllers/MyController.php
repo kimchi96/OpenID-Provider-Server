@@ -109,6 +109,7 @@ class MyController extends Controller
         $user = MyUsersModel::where(['username' => $request->username,
                                      'password' => md5($request->password)])->first();       
         $code = Str::random(10);
+        dd($request->all());
         if($user !== null){
             $CodeModel = new CodeModel;
             $CodeModel->code        = $code;
