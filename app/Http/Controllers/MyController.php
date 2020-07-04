@@ -264,10 +264,10 @@ class MyController extends Controller
                 "user_id" => $check_access_token->user_id
             ];
             $user_info=MyUsersModel::where('user_id',$data)->first();
-            $data['name'] = $user_info->name;
-            $data['address'] = $user_info->address;
-            $data['email'] = $user_info->email;
-            return response()->json($data,200);
+            $data_info['name'] = $user_info->name;
+            $data_info['address'] = $user_info->address;
+            $data_info['email'] = $user_info->email;
+            return response()->json($data_info,200);
         }
         
     }
