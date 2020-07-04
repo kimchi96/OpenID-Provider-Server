@@ -261,7 +261,11 @@ class MyController extends Controller
         }
         else{
             $data = [
-                "address" => $check_access_token->address
+                "user_id" => $check_access_token->user_id
+            ];
+            $user_info=MyUsersModel::where('user_id',$data)->first();
+            $data[] = [
+                "address" => $user_info->address
             ];
             return response()->json($data,200);
         }
