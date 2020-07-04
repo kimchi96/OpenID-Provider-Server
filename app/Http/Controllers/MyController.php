@@ -254,7 +254,7 @@ class MyController extends Controller
         $key = $authorization[1];
 
         $check_access_token = TokenModel::where('access_token', $key)->first();
-        if($check_access_token -> isEmpty()){
+        if($check_access_token == null){
             return response()->json([
                 "error" => "invalid_request:access_token"
             ], 401);//check error
