@@ -260,9 +260,11 @@ class MyController extends Controller
             ], 401);//check error
         }
         else{
-            return response()->json([
-            "user-info" => $check_access_token
-        ],200);
+            $resultData = json_decode($check_access_token);
+            $data = [
+                "address" => $resultData->address
+            ];
+            return response()->json($data,200);
         }
         
     }
