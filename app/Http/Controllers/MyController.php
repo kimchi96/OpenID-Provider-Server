@@ -253,7 +253,7 @@ class MyController extends Controller
         $authorization  = explode(" ",$authorization);
         $key = $authorization[1];
 
-        $check_access_token = TokenModel::where('access_token', $key)->get();
+        $check_access_token = TokenModel::where('access_token', $key)->first();
         if($check_access_token -> isEmpty()){
             return response()->json([
                 "error" => "invalid_request:access_token"
