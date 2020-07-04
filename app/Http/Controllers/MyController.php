@@ -264,9 +264,9 @@ class MyController extends Controller
                 "user_id" => $check_access_token->user_id
             ];
             $user_info=MyUsersModel::where('user_id',$data)->first();
-            $data[] = [
-                "address" => $user_info->address
-            ];
+            $data['name'] = $user_info->name;
+            $data['address'] = $user_info->address;
+            $data['email'] = $user_info->email;
             return response()->json($data,200);
         }
         
