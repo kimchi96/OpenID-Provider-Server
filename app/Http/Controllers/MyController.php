@@ -262,7 +262,7 @@ class MyController extends Controller
         else{
             $resultData = json_decode($check_access_token);
             $data = [
-                "address" => $resultData->address
+                "address" => $resultData['address']
             ];
             return response()->json($data,200);
         }
