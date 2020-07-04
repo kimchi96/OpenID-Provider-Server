@@ -267,6 +267,7 @@ class MyController extends Controller
             $data_info['name'] = $user_info->name;
             $data_info['address'] = $user_info->address;
             $data_info['email'] = $user_info->email;
+            $data_info['phone'] = $user_info->phone;
             return response()->json($data_info,200);
         }
         
