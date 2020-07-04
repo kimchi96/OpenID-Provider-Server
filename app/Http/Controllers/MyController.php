@@ -261,7 +261,6 @@ class MyController extends Controller
         }
         else{
             $resultData = json_decode($check_access_token);
-            dd($resultData);
             $data = [
                 "address" => $resultData->address
             ];
