@@ -1,11 +1,17 @@
 <?php
-    public function base64_encode_url($string) 
+
+namespace utils\Bases64URL;
+
+	class Bases64URL
+{
+    public function base64_encode_url($data) 
     {
-    	return str_replace(['+','/','='], ['-','_',''], base64_encode($string));
+    	return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 	}
 
-	public function base64_decode_url($string) 
+	public function base64_decode_url($data) 
 	{
-    	return base64_decode(str_replace(['-','_'], ['+','/'], $string));
+    	return base64_decode(strtr($data, '-_', '+/'));
 	}
+}
 ?>
