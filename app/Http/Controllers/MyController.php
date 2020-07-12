@@ -162,8 +162,6 @@ class MyController extends Controller
     
     public function postToken(Request $request)
     {
-        include(utils_path() . '\Base64URL.php');
-
         $authorization = $request->headers->get('authorization');
         if(!$authorization){
             return response()->json([
@@ -173,8 +171,7 @@ class MyController extends Controller
         }
         
         $authorization  = explode(" ", $authorization);
-        $keyGenerateToken = base64_encode_url($authorization[1]);
-        /*$keyGenerateToken = base64_encode_url($authorization[1]), '+/', '-_'), '=');*/
+        $keyGenerateToken = rtrim(strtr(base64_encode($authorization[1]), '+/', '-_'), '=');
 
         $postData = $request->post();
         $code = $postData['code'];
