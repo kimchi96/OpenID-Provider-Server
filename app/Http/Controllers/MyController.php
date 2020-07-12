@@ -171,7 +171,8 @@ class MyController extends Controller
         }
         
         $authorization  = explode(" ", $authorization);
-        /*$keyGenerateToken = rtrim(strtr(base64_encode($authorization[1]), '+/', '-_'), '=');*/
+        dd($authorization);
+        $keyGenerateToken = rtrim(strtr(base64_encode($authorization[1]), '+/', '-_'), '=');
 
         $postData = $request->post();
         $code = $postData['code'];
