@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //api get token
-Route::post('/token', 'MyController@postToken');
+Route::get('/token', 'MyController@postToken');
 
 //api get user info
 Route::get('/userinfo', 'MyController@getUserInfo');
