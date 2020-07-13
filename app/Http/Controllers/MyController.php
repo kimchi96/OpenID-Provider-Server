@@ -8,9 +8,9 @@ use App\MyUsersModel;
 use App\ClientModel;
 use App\CodeModel;
 use App\TokenModel;
-use utils;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use utils;
 use JWTAuth;
 use JWTFactory;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -23,11 +23,6 @@ use Carbon\Carbon;
 
 class MyController extends Controller
 {
-    function __construct(Base64URL $base64URL)
-    {
-        $this->base64URL = $base64URL;
-    }
-
     public function getView_Login(Request $request)
     {   
         $response_type  =   $request->input('response_type'); 
@@ -176,7 +171,7 @@ class MyController extends Controller
         }
         
         $authorization  = explode(" ", $authorization);
-        $keyGenerateToken = $this->base64URL->base64_encode_url($authorization[1]);
+        $keyGenerateToken = base64_encode($authorization[1]);
         dd($keyGenerateToken);
 
         $postData = $request->post();
