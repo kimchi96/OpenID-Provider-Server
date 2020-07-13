@@ -1,13 +1,14 @@
+<?php 
 use App\MyUsersModel;
 use utils\Base64URL;
 use Carbon\Carbon;
 
 class JWT {
-	contructor(){
+	__contructor(){
 
 	}
 
-	public function generaToken(){
+	public function generateToken(){
 		// get the local secret key
 		$authorization  = explode(" ", $authorization);
         $key = base64_encode_url($authorization[1]);
@@ -50,4 +51,4 @@ class JWT {
 
 	}
 }
-
+?>
