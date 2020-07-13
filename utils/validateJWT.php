@@ -1,11 +1,10 @@
 <?php 
+
 use App\MyUsersModel;
 use utils\Base64URL;
 use Carbon\Carbon;
 
 class validateJWT {
-	function __contructor()
-	{
 		public function verifyJWT(){
 			// get the local secret key
 			$key = getenv('SECRET');

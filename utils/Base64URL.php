@@ -1,8 +1,6 @@
 <?php
 
-class JWT {
-	function __contructor()
-	{
+class Base64URL {
 	    public function base64_encode_url($data) 
 	    {
 	    	return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');

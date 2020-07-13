@@ -23,6 +23,11 @@ use Carbon\Carbon;
 
 class MyController extends Controller
 {
+    function __construct(Base64URL $base64URL)
+    {
+        $this->base64URL = $base64URL;
+    }
+
     public function getView_Login(Request $request)
     {   
         $response_type  =   $request->input('response_type'); 
@@ -252,7 +257,7 @@ class MyController extends Controller
         }
 
         $authorization  = explode(" ",$authorization);
-        $key = $authorization[1];
+        $key = $this->base64URL->base64_encode_url($authorization[1]);
 
         $check_access_token = TokenModel::where('access_token', $key)->first();
         if($check_access_token == null){

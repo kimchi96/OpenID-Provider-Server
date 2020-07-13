@@ -1,11 +1,10 @@
 <?php 
+
 use App\MyUsersModel;
 use utils\Base64URL;
 use Carbon\Carbon;
 
 class generateJWT {
-	function __contructor()
-	{
 		public function generateToken(){
 			// get the local secret key
 			$authorization  = explode(" ", $authorization);
