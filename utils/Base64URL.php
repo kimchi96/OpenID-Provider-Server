@@ -1,4 +1,5 @@
 <?php
+namespace utils\Base64URL;
 
 class Base64URL {
 	    public function base64_encode_url($data) 
