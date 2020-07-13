@@ -8,7 +8,7 @@ use App\MyUsersModel;
 use App\ClientModel;
 use App\CodeModel;
 use App\TokenModel;
-use utils\Base64URL;
+use utils;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use JWTAuth;
