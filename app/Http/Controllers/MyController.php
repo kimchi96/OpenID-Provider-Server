@@ -176,7 +176,7 @@ class MyController extends Controller
         }
         
         $authorization  = explode(" ", $authorization);
-        $keyGenerateToken = base64_encode_url($authorization[1]);
+        $keyGenerateToken = $this->base64URL->base64_encode_url($authorization[1]);
         dd($keyGenerateToken);
 
         $postData = $request->post();
@@ -257,7 +257,7 @@ class MyController extends Controller
         }
 
         $authorization  = explode(" ",$authorization);
-        $key = $this->base64URL->base64_encode_url($authorization[1]);
+        $key = $authorization[1];
 
         $check_access_token = TokenModel::where('access_token', $key)->first();
         if($check_access_token == null){
