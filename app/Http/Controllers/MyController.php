@@ -163,7 +163,6 @@ class MyController extends Controller
     public function postToken(Request $request)
     {
         $authorization = $request->headers->get('authorization');
-        dd($authorization);
         if(!$authorization){
             return response()->json([
                 'status'  =>  false,
