@@ -174,27 +174,28 @@ class MyController extends Controller
         $key = $authorization[1];
 
         $postData = $request->query;
+
         $code = $postData->get('code');
-        $redirect_uri = $postData->get('request_uri');
-        $grant_type = $postData->get('grant_type');
-
-        if($grant_type !== 'authorization_code'){
-            return response()->json([
-                "error" => "unsupported_grant_type"
-            ], 400);//check error
-        }
-
-        $CodeModel = CodeModel::where(['code' => $request->code])->first();
-        if($CodeModel === null){
+        dd($code);
+        $CodeModel = CodeModel::where(['code' => $code])->first();
+        if($code === null){
             return response()->json([
                 "error" => "invalid_request"
             ], 400);//check error
         }
 
+        $redirect_uri = $postData->get('request_uri');
         $client = ClientModel::where(['client_id' => $CodeModel->client_id])->first();
         if($redirect_uri != $client->url_redirect){
             return response()->json([
                 "error" => "invalid_client"
+            ], 400);//check error
+        }
+        
+        $grant_type = $postData->get('grant_type');
+        if($grant_type !== 'authorization_code'){
+            return response()->json([
+                "error" => "unsupported_grant_type"
             ], 400);//check error
         }
 
