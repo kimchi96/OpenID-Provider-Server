@@ -182,8 +182,8 @@ class MyController extends Controller
                 "error" => "invalid_request"
             ], 400);//check error
         }
-        dd($postData);
-        $redirect_uri = $postData->get('request_url');
+
+        $redirect_uri = $postData->get('redirect_uri');
         $client = ClientModel::where(['client_id' => $CodeModel->client_id])->first();
         if($redirect_uri != $client->url_redirect){
             return response()->json([
