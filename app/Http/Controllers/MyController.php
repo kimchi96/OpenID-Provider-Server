@@ -174,7 +174,7 @@ class MyController extends Controller
         $keyGenerateToken = $authorization[1];
 
         $postData = $request->post();
-        /*$code = $postData['code'];
+        $code = $postData['code'];
         $redirect_uri = $postData['redirect_uri'];
         $grant_type = $postData['grant_type'];
         if($grant_type !== 'authorization_code'){
@@ -195,7 +195,7 @@ class MyController extends Controller
             return response()->json([
                 "error" => "invalid_client"
             ], 400);//check error
-        }*/
+        }
 
         
         /*$user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();*/
