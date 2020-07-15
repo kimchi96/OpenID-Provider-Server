@@ -184,6 +184,7 @@ class MyController extends Controller
         }
 
         $redirect_uri = $postData->get('request_uri');
+        dd($redirect_uri);
         $client = ClientModel::where(['client_id' => $CodeModel->client_id])->first();
         if($redirect_uri != $client->url_redirect){
             return response()->json([
