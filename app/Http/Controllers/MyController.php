@@ -176,8 +176,8 @@ class MyController extends Controller
         $postData = $request->query;
 
         $code = $postData->get('code');
-        $CodeModel = CodeModel::where(['code',$code])->first();
-        if($code === null){
+        $CodeModel = CodeModel::where(['code', $code])->first();
+        if($CodeModel === null){
             return response()->json([
                 "error" => "invalid_request"
             ], 400);//check error
