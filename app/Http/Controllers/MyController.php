@@ -171,10 +171,9 @@ class MyController extends Controller
         }
         
         $authorization  = explode(" ", $authorization);
-        $keyGenerateToken = $authorization[1];
+        $key = $authorization[1];
 
-        $postData = $request->query->post();
-        dd($postData);
+        $postData = $request->post();
         $code = $postData['code'];
         $redirect_uri = $postData['redirect_uri'];
         $grant_type = $postData['grant_type'];
