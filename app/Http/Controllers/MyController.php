@@ -174,21 +174,21 @@ class MyController extends Controller
         $key = $authorization[1];
 
         $postData = $request->query;
-        $code = $postData->get('code');
+        $code = $postData->post('code');
         $CodeModel = CodeModel::where(['code'=> $code])->first();
         if($CodeModel == null){
             return response()->json([
                 "error" => "invalid_request"
             ], 400);//check error
         }
-        $redirect_uri = $postData->get('redirect_uri');
+        $redirect_uri = $postData->post('redirect_uri');
         $client = ClientModel::where(['client_id' => $CodeModel->client_id])->first();
         if($redirect_uri != $client->url_redirect){
             return response()->json([
                 "error" => "invalid_client"
             ], 400);//check error
         }
-        $grant_type = $postData->get('grant_type');
+        $grant_type = $postData->post('grant_type');
         if($grant_type !== 'authorization_code'){
             return response()->json([
                 "error" => "unsupported_grant_type"
@@ -223,7 +223,7 @@ class MyController extends Controller
 
         // Create Signature Hash
         $signature = hash_hmac('sha256', $base64url_Header . "." . $base64url_Payload, $key, true);
-        
+
         // Encode Signature to Base64Url String
         $base64url_Signature = rtrim(strtr(base64_encode($signature), '+/', '-_'), '=');
 
