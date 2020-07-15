@@ -222,16 +222,15 @@ class MyController extends Controller
         $id_token = JWTAuth::encode($payload, $keyGenerateToken)->get();*/
 
         // Create the token header
-        $header = [
+        $header = json_encode([
             "typ" => "JWT",
             "alg" => "HS256"
-        ];
-        dd($header);
+        ]);
         $base64url_Header = rtrim(strtr(base64_encode($header), '+/', '-_'), '='); 
 
         // Create the token payload
         $user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();
-        $payload = [
+        $payload = json_encode([
             "sub"               => $user->user_id,
             "email"             => $user->email,
             "name"              => $user->name,
@@ -243,7 +242,7 @@ class MyController extends Controller
             "iss"               => "http://op.com",
             "iat"               => new IssuedAt(Carbon::now('UTC')),
             "exp"               => new Expiration(Carbon::now('UTC')->addDays(1))
-        ];
+        ]);
         $base64url_Payload = rtrim(strtr(base64_encode($payload), '+/', '-_'), '=');
 
         // Create Signature Hash
