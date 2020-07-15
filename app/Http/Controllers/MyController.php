@@ -223,7 +223,7 @@ class MyController extends Controller
 
         // Create Signature Hash
         $signature = hash_hmac('sha256', $base64url_Header . "." . $base64url_Payload, $key, true);
-
+        
         // Encode Signature to Base64Url String
         $base64url_Signature = rtrim(strtr(base64_encode($signature), '+/', '-_'), '=');
 
@@ -240,7 +240,7 @@ class MyController extends Controller
             $Token->client_id       = $client->client_id;
             $Token->user_id         = $CodeModel->user_id;
             $Token -> save();
-            
+
         return response()->json([
              "id_token" => $jwt_id_token,
              "access_token" => $access_token,
