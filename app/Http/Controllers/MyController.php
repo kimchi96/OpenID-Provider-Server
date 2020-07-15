@@ -174,7 +174,6 @@ class MyController extends Controller
         $key = $authorization[1];
 
         $postData = $request->query;
-
         $code = $postData->get('code');
         $CodeModel = CodeModel::where(['code'=> $code])->first();
         if($CodeModel == null){
@@ -182,7 +181,6 @@ class MyController extends Controller
                 "error" => "invalid_request"
             ], 400);//check error
         }
-
         $redirect_uri = $postData->get('redirect_uri');
         $client = ClientModel::where(['client_id' => $CodeModel->client_id])->first();
         if($redirect_uri != $client->url_redirect){
@@ -190,7 +188,6 @@ class MyController extends Controller
                 "error" => "invalid_client"
             ], 400);//check error
         }
-
         $grant_type = $postData->get('grant_type');
         if($grant_type !== 'authorization_code'){
             return response()->json([
@@ -198,30 +195,8 @@ class MyController extends Controller
             ], 400);//check error
         }
 
-        
-        /*$user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();*/
-
-        /*$token = null;*/
         $token_type = 'Bearer';
         $ttl = 3600;
-        /*$data = [
-            "sub"               => $user->user_id,
-            "email"             => $user->email,
-            "name"              => $user->name,
-            "first_name"        => $user->firstname,
-            "last_name"         => $user->lastname,
-            "phone"             => $user->phone,
-            "address"           => $user->address,
-            "aud"               => $CodeModel->client_id,
-            "iss"               => "http://op.com",
-            "iat"               => new IssuedAt(Carbon::now('UTC')),
-            "exp"               => new Expiration(Carbon::now('UTC')->addDays(1))
-        ];
-
-        $customClaims = JWTFactory::customClaims($data);
-        $payload = JWTFactory::make($data);
-        $id_token = JWTAuth::encode($payload, $keyGenerateToken)->get();*/
-
         // Create the token header
         $header = json_encode([
             "typ" => "JWT",
@@ -265,9 +240,9 @@ class MyController extends Controller
             $Token->client_id       = $client->client_id;
             $Token->user_id         = $CodeModel->user_id;
             $Token -> save();
-        /*Log::debug($Token);*/
+            
         return response()->json([
-             "id_token" => $id_token,
+             "id_token" => $jwt_id_token,
              "access_token" => $access_token,
              "token_type" => $token_type,
              "expires_in" => $ttl  
