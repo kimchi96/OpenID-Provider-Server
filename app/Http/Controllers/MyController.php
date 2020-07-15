@@ -176,8 +176,7 @@ class MyController extends Controller
         $postData = $request->query;
 
         $code = $postData->get('code');
-        dd($code);
-        $CodeModel = CodeModel::where(['code' => $code])->first();
+        $CodeModel = CodeModel::where(['code',$code])->first();
         if($code === null){
             return response()->json([
                 "error" => "invalid_request"
@@ -191,7 +190,7 @@ class MyController extends Controller
                 "error" => "invalid_client"
             ], 400);//check error
         }
-        
+
         $grant_type = $postData->get('grant_type');
         if($grant_type !== 'authorization_code'){
             return response()->json([
