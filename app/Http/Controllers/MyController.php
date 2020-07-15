@@ -173,11 +173,11 @@ class MyController extends Controller
         $authorization  = explode(" ", $authorization);
         $key = $authorization[1];
 
-        dd($request);
-        /*$postData = $request->post();
+        $postData = $request->query->get();
+        dd($postData);
         $code = $postData['code'];
         $redirect_uri = $postData['redirect_uri'];
-        $grant_type = $postData['grant_type'];*/
+        $grant_type = $postData['grant_type'];
 
         if($grant_type !== 'authorization_code'){
             return response()->json([
