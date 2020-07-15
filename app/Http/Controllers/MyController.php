@@ -174,8 +174,8 @@ class MyController extends Controller
         $key = $authorization[1];
 
         $postData = $request->query;
-        dd($postData);
         $code = $postData['code'];
+        dd($code);
         $redirect_uri = $postData['redirect_uri'];
         $grant_type = $postData['grant_type'];
 
