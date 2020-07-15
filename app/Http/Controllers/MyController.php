@@ -163,7 +163,6 @@ class MyController extends Controller
     public function postToken(Request $request)
     {
         $authorization = $request->headers->get('authorization');
-        dd($request->headers);
         if(!$authorization){
             return response()->json([
                 'status'  =>  false,
@@ -175,6 +174,7 @@ class MyController extends Controller
         $key = $authorization[1];
 
         $postData = $request->query;
+        dd($postData->get('code'));
         $code = $postData['code'];
         $redirect_uri = $postData['redirect_uri'];
         $grant_type = $postData['grant_type'];
