@@ -222,11 +222,11 @@ class MyController extends Controller
         $id_token = JWTAuth::encode($payload, $keyGenerateToken)->get();*/
 
         // Create the token header
-        $header = [{
+        $header = [
             'typ' => 'JWT',
             'alg' => 'HS256'
-        }];
-        $base64url_Header = rtrim(strtr(base64_encode($header), '+/', '-_'), '='); 
+        ];
+        $base64url_Header = rtrim(strtr(base64_encode($header($header)), '+/', '-_'), '='); 
 
         // Create the token payload
         $user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();
