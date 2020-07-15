@@ -223,8 +223,8 @@ class MyController extends Controller
 
         // Create the token header
         $header = array(
-            'typ' => JWT,
-            'alg' => HS256
+            'typ' => 'JWT',
+            'alg' => 'HS256'
         );
         $base64url_Header = rtrim(strtr(base64_encode($header), '+/', '-_'), '='); 
 
