@@ -198,12 +198,12 @@ class MyController extends Controller
         }
 
         
-        $user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();
+        /*$user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();*/
 
-        $token = null;
+        /*$token = null;*/
         $token_type = 'Bearer';
         $ttl = 3600;
-        $data = [
+        /*$data = [
             "sub"               => $user->user_id,
             "email"             => $user->email,
             "name"              => $user->name,
@@ -219,19 +219,52 @@ class MyController extends Controller
 
         $customClaims = JWTFactory::customClaims($data);
         $payload = JWTFactory::make($data);
-        $id_token = JWTAuth::encode($payload, $keyGenerateToken)->get();
+        $id_token = JWTAuth::encode($payload, $keyGenerateToken)->get();*/
+
+        // Create the token header
+        $header = [
+            'typ' => 'JWT',
+            'alg' => 'HS256'
+        ];
+        $base64url_Header = rtrim(strtr(base64_encode($header), '+/', '-_'), '='); 
+
+        // Create the token payload
+        $user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();
+        $payload = [
+            "sub"               => $user->user_id,
+            "email"             => $user->email,
+            "name"              => $user->name,
+            "first_name"        => $user->firstname,
+            "last_name"         => $user->lastname,
+            "phone"             => $user->phone,
+            "address"           => $user->address,
+            "aud"               => $CodeModel->client_id,
+            "iss"               => "http://op.com",
+            "iat"               => new IssuedAt(Carbon::now('UTC')),
+            "exp"               => new Expiration(Carbon::now('UTC')->addDays(1))
+        ];
+        $base64url_Payload = rtrim(strtr(base64_encode($payload), '+/', '-_'), '=');
+
+        // Create Signature Hash
+        $signature = hash_hmac('sha256', $base64url_Header . "." . $base64url_Payload, $key, true);
+
+        // Encode Signature to Base64Url String
+        $base64url_Signature = rtrim(strtr(base64_encode($signature), '+/', '-_'), '=');
+
+        // Create JWT
+        $jwt_id_token = $base64url_Header . "." . $base64url_Payload . "." . $base64url_Signature;
 
         $access_token = Str::random(10);
         
             $Token = new TokenModel;
-            $Token->id_token= $id_token;
-            $Token->access_token = $access_token;
-            $Token->token_type = $token_type;
-            $Token->expires_in = $ttl;
-            $Token->client_id=$client->client_id;
-            $Token->user_id=$CodeModel->user_id;
+            $Token->id_token        = $jwt_id_token;
+            $Token->access_token    = $access_token;
+            $Token->token_type      = $token_type;
+            $Token->expires_in      = $ttl;
+            $Token->client_id       = $client->client_id;
+            $Token->user_id         = $CodeModel->user_id;
             $Token -> save();
-        Log::debug($Token);
+        /*Log::debug($Token);*/
         return response()->json([
              "id_token" => $id_token,
              "access_token" => $access_token,
