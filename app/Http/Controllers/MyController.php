@@ -226,7 +226,7 @@ class MyController extends Controller
             'typ' => 'JWT',
             'alg' => 'HS256'
         ];
-        $base64url_Header = rtrim(strtr(base64_encode($header($header)), '+/', '-_'), '='); 
+        $base64url_Header = rtrim(strtr(base64_encode($header[0]), '+/', '-_'), '='); 
 
         // Create the token payload
         $user = MyUsersModel::where(['user_id' => $CodeModel->user_id])->first();
