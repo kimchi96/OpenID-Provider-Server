@@ -10,7 +10,6 @@ use App\CodeModel;
 use App\TokenModel;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use utils;
 use JWTAuth;
 use JWTFactory;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -265,7 +264,7 @@ class MyController extends Controller
         $check_access_token = TokenModel::where('access_token', $key)->first();
         if($check_access_token == null){
             return response()->json([
-                "error" => "invalid_request:access_token"
+                "error" => "invalid_request"
             ], 401);//check error
         }
         else{
